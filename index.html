@@ -97,7 +97,11 @@ window.requestIdleCallback(()=>elem.classList.add("active"));
 } else {
 window.requestIdleCallback(()=>{
   elem.classList.remove("active")
-  setTimeout(()=> {elem.style.left = elem.style.left + 10 + "%"}, 1000);
+  setTimeout(()=> {
+const l = parseInt(elem.style.left);
+elem.style.left = l >=110 ? l-120+"%" : l + 10 + "%";
+
+}, 1000);
 });
 }
 });
