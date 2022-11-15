@@ -95,7 +95,10 @@ if (entry.isIntersecting) {
 console.log(elem);
 window.requestIdleCallback(()=>elem.classList.add("active"));
 } else {
-window.requestIdleCallback(()=>elem.classList.remove("active"));
+window.requestIdleCallback(()=>{
+  elem.classList.remove("active")
+  setTimeout(()=> {elem.style.left = elem.style.left + 10 + "%"}, 1000);
+});
 }
 });
 };
