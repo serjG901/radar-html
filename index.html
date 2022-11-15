@@ -92,7 +92,7 @@ let callback = (entries, observer) => {
 entries.forEach((entry) => {
 let elem = entry.target;
 if (entry.isIntersecting) {
-elem.classList.add("active");
+window.requestIdleCallback(()=>elem.classList.add("active"));
 } else {
 window.requestIdleCallback(()=>{
   elem.classList.remove("active")
