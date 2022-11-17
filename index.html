@@ -4,6 +4,7 @@
 *{
 padding:0;
 margin:0;
+box-sizing: border-box;
 }
 .center {
 background-color: gray;
@@ -60,7 +61,7 @@ to {transform: rotate(-360deg)}
 }
 @keyframes active {
 0% {opacity: 0}
-20% {opacity: 1}
+30% {opacity: 1}
 100% {opacity: 0.5}
 }
 </style>
@@ -68,19 +69,19 @@ to {transform: rotate(-360deg)}
 <div class="center">
 <div class="radar" id="radar">
 <div class="display">
-<div class="target" style="top:20%;left:20%">
-</div>
+<div class="target" style="top:10%;left:10%"></div>
+<div class="target" style="top:20%;left:20%"></div>
+<div class="target" style="top:30%;left:50%"></div>
+<div class="target" style="top:40%;left:40%"></div>
+<div class="target" style="top:10%;left:50%"></div>
+<div class="target" style="top:60%;left:60%"></div>
+<div class="target" style="top:70%;left:20%"></div>
+<div class="target" style="top:80%;left:80%"></div>
+<div class="target" style="top:30%;left:90%"></div>
 </div>
 </div>
 </div>
 <script>
-
-let options = {
-  root: document.querySelector('#radar'),
-  rootMargin: '0px',
-  threshold: 1.0
-}
-let targets = document.querySelectorAll('.target');
 
 let callback = (entries, observer) => {
 entries.forEach((entry) => {
@@ -92,13 +93,19 @@ window.requestIdleCallback(()=>{
   elem.classList.remove("active")
   setTimeout(()=> {
 const l = parseInt(elem.style.left);
-elem.style.left = l >=110 ? l-120+"%" : l + 10 + "%";
+elem.style.left = l >=100 ? l-100+"%" : l + 10 + "%";
 
 }, 1000);
 });
 }
 });
 };
+let options = {
+  root: document.querySelector('#radar'),
+  rootMargin: '0px',
+  threshold: 1.0
+}
+let targets = document.querySelectorAll('.target');
 let observer = new IntersectionObserver(callback, options);
 targets.forEach((target) => {observer.observe(target);});
 
