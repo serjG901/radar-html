@@ -109,6 +109,11 @@ let targets = document.querySelectorAll('.target');
 let observer = new IntersectionObserver(callback, options);
 targets.forEach((target) => {observer.observe(target);});
 
+setInterval(()=>{
+let event = new CustomEvent("scroll", {});
+window.dispatchEvent(event);
+},4500);
+
 </script>
 </body>
 </html>
