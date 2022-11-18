@@ -109,20 +109,6 @@ let targets = document.querySelectorAll('.target');
 let observer = new IntersectionObserver(callback, options);
 targets.forEach((target) => {observer.observe(target);});
 
-const timer = ()=> {
-setTimeout(()=>{
-const event = new MouseEvent('click', {
-    view: window,
-    bubbles: true,
-    cancelable: true
-  });
-let elem = document.querySelector('#radar');
-elem.dispatchEvent(event);
-timer();
-},4500);
-}
-timer();
-
 </script>
 </body>
 </html>
