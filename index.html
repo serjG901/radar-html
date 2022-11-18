@@ -109,12 +109,16 @@ let targets = document.querySelectorAll('.target');
 let observer = new IntersectionObserver(callback, options);
 targets.forEach((target) => {observer.observe(target);});
 
-setInterval(()=>{
+const timer = ()=> {
+setTimeout(()=>{
 const event = new Event("scroll");
 let elem = document.querySelector('#radar');
 elem.addEventListener("scroll", (e) => { alert("scroll")}, false);
 elem.dispatchEvent(event);
+timer();
 },4500);
+}
+timer();
 
 </script>
 </body>
