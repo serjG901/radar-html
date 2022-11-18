@@ -112,8 +112,8 @@ targets.forEach((target) => {observer.observe(target);});
 setInterval(()=>{
 const event = new Event("scroll");
 let elem = document.querySelector('#radar');
-elem.addEventListener("scroll", (e) => { }, false);
-window.dispatchEvent(event);
+elem.addEventListener("scroll", (e) => { alert("scroll")}, false);
+elem.dispatchEvent(event);
 },4500);
 
 </script>
