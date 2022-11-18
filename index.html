@@ -111,9 +111,12 @@ targets.forEach((target) => {observer.observe(target);});
 
 const timer = ()=> {
 setTimeout(()=>{
-const event = new Event("scroll");
+const event = new MouseEvent('click', {
+    view: window,
+    bubbles: true,
+    cancelable: true
+  });
 let elem = document.querySelector('#radar');
-elem.addEventListener("scroll", (e) => { alert("scroll")}, false);
 elem.dispatchEvent(event);
 timer();
 },4500);
