@@ -64,10 +64,11 @@ to {transform: rotate(-360deg)}
 0% {opacity: 0}
 30% {opacity: 1}
 100% {opacity: 0.5}
-keyframes grow {
+@keyframes grow {
   0% {
-    clip-path: circle(100%);
+    clip-path: circle(25%);
   }
+30% {clip-path: circle(100%);}
   100% {
     clip-path: circle(25%);
   }
