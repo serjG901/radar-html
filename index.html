@@ -38,6 +38,7 @@ height: 5%;
 opacity: 0;
 background-color: limegreen;
 transition: opacity 1s linear;
+clip-path: circle(25%);
 }
 .p1{
 top:80%;
@@ -49,7 +50,7 @@ left:80%;
 }
 .active{
 opacity: 0.5;
-animation: active 1s linear;
+animation: active 1s linear, grow 1s linear;
 }
 @keyframes radar {
 from {transform: rotate(0deg)}
@@ -63,6 +64,15 @@ to {transform: rotate(-360deg)}
 0% {opacity: 0}
 30% {opacity: 1}
 100% {opacity: 0.5}
+keyframes grow {
+  0% {
+    clip-path: circle(100%);
+  }
+  100% {
+    clip-path: circle(25%);
+  }
+}
+
 }
 </style>
 <body>
