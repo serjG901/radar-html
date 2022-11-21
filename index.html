@@ -29,15 +29,15 @@ clip-path: circle(50%);
 width: 200%;
 height: 200%;	
 position:relative;
-animation: display 8s linear infinite;
+animation: display 8s linear infinite, clip 24s linear infinite;
+background-color: rgba(0,0,0,0.5);
 }
 .target {
 position:absolute;
 border-radius: 50%;
 opacity: 0;
 background-color: limegreen;
-transition: opacity 1s linear;
-transform: scale(0.5);
+transform: scale(0.9);
 filter: blur(8px);
 }
 .p1{
@@ -49,8 +49,7 @@ top:80%;
 left:80%;
 }
 .active{
-opacity: 0.5;
-animation: active 1s linear;
+animation: active 2s linear;
 }
 @keyframes radar {
 0% {transform: rotate(0deg);}
@@ -58,14 +57,19 @@ animation: active 1s linear;
 100% {transform: rotate(360deg);}
 }
 @keyframes display {
-0% {transform: rotate(0deg); clip-path: circle(50%);}
-50% {transform: rotate(-180deg); clip-path: circle(49%);}
-100% {transform: rotate(-360deg); clip-path: circle(50%);}
+0% {transform: rotate(0deg);}
+50% {transform: rotate(-180deg);}
+100% {transform: rotate(-360deg);}
+}
+@keyframes clip {
+0% {clip-path: circle(50%);}
+50% {clip-path: circle(49%);}
+100% {clip-path: circle(50%);}
 }
 @keyframes active {
-0% {opacity: 0;transform: scale(0.5);}
+0% {opacity: 0;transform: scale(0.9);}
 30% {opacity: 1;transform: scale(1);}
-100% {opacity: 0.5;transform: scale(0.5);}
+100% {opacity: 0;transform: scale(0.9);}
 }
 </style>
 <body>
@@ -75,12 +79,12 @@ animation: active 1s linear;
 <div class="target" style="width: 5%;height: 5%;top:10%;left:10%"></div>
 <div class="target" style="width: 7%;height: 5%;top:20%;left:20%"></div>
 <div class="target" style="width: 10%;height: 8%;top:30%;left:50%"></div>
-<div class="target" style="width: 5%;height: 5%;top:40%;left:40%"></div>
-<div class="target" style="width: 10%;height: 5%;top:10%;left:50%"></div>
+<div class="target" style="width: 4%;height: 4%;top:40%;left:40%"></div>
+<div class="target" style="width: 10%;height: 5%;top:90%;left:30%"></div>
 <div class="target" style="width: 6%;height: 5%;top:60%;left:60%"></div>
 <div class="target" style="width: 5%;height: 3%;top:70%;left:20%"></div>
 <div class="target" style="width: 5%;height: 2%;top:80%;left:80%"></div>
-<div class="target" style="width: 5%;height: 1%;top:30%;left:90%"></div>
+<div class="target" style="width: 3%;height: 1%;top:35%;left:90%"></div>
 </div>
 </div>
 </div>
@@ -97,7 +101,6 @@ window.requestIdleCallback(()=>{
   setTimeout(()=> {
 const l = parseInt(elem.style.left);
 elem.style.left = l >=100 ? l-100+"%" : l + 10 + "%";
-
 }, 1000);
 });
 }
@@ -106,7 +109,7 @@ elem.style.left = l >=100 ? l-100+"%" : l + 10 + "%";
 let options = {
   root: document.querySelector('#radar'),
   rootMargin: '0px',
-  threshold: 0
+  threshold: 1
 }
 let targets = document.querySelectorAll('.target');
 let observer = new IntersectionObserver(callback, options);
