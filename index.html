@@ -1,119 +1,178 @@
 <html>
-<title>Radar</title>
-<style>
-*{
-padding:0;
-margin:0;
-}
-.center {
-position: absolute;
-width: min(100vw,100vh);
-height: min(100vw,100vh);
-overflow:hidden;
-border-radius: 50%;
-background-color: darkgreen;
-}
-.radar {
-background-color: green;
-background: linear-gradient(45deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 50%, rgba(0,255,0,1) 100%);
-width: 50%;
-height: 50%;
-border-top-left-radius: 100%;
-transform-origin: bottom right;
-animation: radar 8s linear infinite;
-transition: 1s linear;
-}
-.display {
-clip-path: circle(50%);
-width: 200%;
-height: 200%;	
-position:relative;
-animation: display 8s linear infinite, clip 24s linear infinite;
-background-color: rgba(0,0,0,0.5);
-}
-.target {
-position:absolute;
-border-radius: 50%;
-opacity: 0;
-background-color: limegreen;
-transform: scale(0.9);
-filter: blur(8px);
-}
-.p1{
-top:80%;
-left:20%;
-}
-.p2{
-top:80%;
-left:80%;
-}
-.active{
-animation: active 2s linear;
-}
-@keyframes radar {
-0% {transform: rotate(0deg);}
-50% {transform: rotate(180deg);}
-100% {transform: rotate(360deg);}
-}
-@keyframes display {
-0% {transform: rotate(0deg);}
-50% {transform: rotate(-180deg);}
-100% {transform: rotate(-360deg);}
-}
-@keyframes clip {
-0% {clip-path: circle(50%);}
-50% {clip-path: circle(49%);}
-100% {clip-path: circle(50%);}
-}
-@keyframes active {
-0% {opacity: 0;transform: scale(0.9);}
-30% {opacity: 1;transform: scale(1);}
-100% {opacity: 0;transform: scale(0.9);}
-}
-</style>
-<body>
-<div class="center">
-<div class="radar" id="radar">
-<div class="display">
-<div class="target" style="width: 5%;height: 5%;top:10%;left:10%"></div>
-<div class="target" style="width: 7%;height: 5%;top:20%;left:20%"></div>
-<div class="target" style="width: 6%;height: 4%;top:30%;left:10%"></div>
-<div class="target" style="width: 4%;height: 4%;top:40%;left:60%"></div>
-<div class="target" style="width: 7%;height: 5%;top:90%;left:30%"></div>
-<div class="target" style="width: 6%;height: 5%;top:60%;left:60%"></div>
-<div class="target" style="width: 5%;height: 3%;top:70%;left:20%"></div>
-<div class="target" style="width: 5%;height: 2%;top:80%;left:80%"></div>
-<div class="target" style="width: 3%;height: 1%;top:35%;left:90%"></div>
-</div>
-</div>
-</div>
-<script>
-
-let callback = (entries, observer) => {
-entries.forEach((entry) => {
-let elem = entry.target;
-if (entry.isIntersecting) {
-window.requestIdleCallback(()=>elem.classList.add("active"));
-} else {
-window.requestIdleCallback(()=>{
-  elem.classList.remove("active")
-  setTimeout(()=> {
-const l = parseInt(elem.style.left);
-elem.style.left = l >=100 ? l-100+"%" : l + 10 + "%";
-}, 1000);
-});
-}
-});
-};
-let options = {
-  root: document.querySelector('#radar'),
-  rootMargin: '0px',
-  threshold: 1
-}
-let targets = document.querySelectorAll('.target');
-let observer = new IntersectionObserver(callback, options);
-targets.forEach((target) => {observer.observe(target);});
-
-</script>
-</body>
+  <title>Radar</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    .center {
+      position: absolute;
+      width: min(100vw, 100vh);
+      height: min(100vw, 100vh);
+      overflow: hidden;
+      border-radius: 50%;
+      background-color: darkgreen;
+    }
+    .radar {
+      background-color: green;
+      background: linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0) 50%,
+        rgba(0, 255, 0, 1) 100%
+      );
+      width: 50%;
+      height: 50%;
+      border-top-left-radius: 100%;
+      transform-origin: bottom right;
+      animation: radar 8s linear infinite;
+      transition: 1s linear;
+    }
+    .display {
+      clip-path: circle(50%);
+      width: 200%;
+      height: 200%;
+      position: relative;
+      animation: display 8s linear infinite, clip 24s linear infinite;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    .target {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0;
+      background-color: limegreen;
+      transform: scale(0.9);
+      filter: blur(8px);
+    }
+    .p1 {
+      top: 80%;
+      left: 20%;
+    }
+    .p2 {
+      top: 80%;
+      left: 80%;
+    }
+    .active {
+      animation: active 2s linear;
+    }
+    @keyframes radar {
+      0% {
+        transform: rotate(0deg);
+      }
+      50% {
+        transform: rotate(180deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    @keyframes display {
+      0% {
+        transform: rotate(0deg);
+      }
+      50% {
+        transform: rotate(-180deg);
+      }
+      100% {
+        transform: rotate(-360deg);
+      }
+    }
+    @keyframes clip {
+      0% {
+        clip-path: circle(50%);
+      }
+      50% {
+        clip-path: circle(49%);
+      }
+      100% {
+        clip-path: circle(50%);
+      }
+    }
+    @keyframes active {
+      0% {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      30% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+    }
+  </style>
+  <body>
+    <div class="center">
+      <div class="radar" id="radar">
+        <div class="display">
+          <div
+            class="target"
+            style="width: 5%; height: 5%; top: 10%; left: 10%"
+          ></div>
+          <div
+            class="target"
+            style="width: 7%; height: 5%; top: 20%; left: 20%"
+          ></div>
+          <div
+            class="target"
+            style="width: 6%; height: 4%; top: 30%; left: 10%"
+          ></div>
+          <div
+            class="target"
+            style="width: 4%; height: 4%; top: 40%; left: 60%"
+          ></div>
+          <div
+            class="target"
+            style="width: 7%; height: 5%; top: 90%; left: 30%"
+          ></div>
+          <div
+            class="target"
+            style="width: 6%; height: 5%; top: 60%; left: 60%"
+          ></div>
+          <div
+            class="target"
+            style="width: 5%; height: 3%; top: 70%; left: 20%"
+          ></div>
+          <div
+            class="target"
+            style="width: 5%; height: 2%; top: 80%; left: 80%"
+          ></div>
+          <div
+            class="target"
+            style="width: 3%; height: 1%; top: 35%; left: 90%"
+          ></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      let callback = (entries, observer) => {
+        entries.forEach((entry) => {
+          let elem = entry.target;
+          if (entry.isIntersecting) {
+            window.requestIdleCallback(() => elem.classList.add("active"));
+          } else {
+            window.requestIdleCallback(() => {
+              elem.classList.remove("active");
+              setTimeout(() => {
+                const l = parseInt(elem.style.left);
+                elem.style.left = l >= 100 ? l - 100 + "%" : l + 10 + "%";
+              }, 1000);
+            });
+          }
+        });
+      };
+      let options = {
+        root: document.querySelector("#radar"),
+        rootMargin: "0px",
+        threshold: 1,
+      };
+      let targets = document.querySelectorAll(".target");
+      let observer = new IntersectionObserver(callback, options);
+      targets.forEach((target) => {
+        observer.observe(target);
+      });
+    </script>
+  </body>
 </html>
